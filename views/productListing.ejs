@@ -1,0 +1,29 @@
+<% include ./partials/header %>
+<body>
+  <div class="container">
+    <h1>Product Listing</h1>
+    <%if(currentUser.employeeType != "cashier"){%>
+    <form action="/productDetail" method="GET">
+      <button class="main-button">Create New</button>
+    </form>
+    <% } %>
+      <%product.forEach(product =>{%>
+        <%if(currentUser.employeeType != "cashier"){%>
+        <a class="productLink" href="/productDetail/<%=product.id%>">
+        <% } %>
+          <div class="product">
+            <%=product.lookupCode%>
+            <br>
+            <%=product.count%>
+            <br>
+            <%=product.created.toDateString()%>
+            <%=product.created.toLocaleTimeString('en-US')%>
+          </div>
+        <%if(currentUser.employeeType != "cashier"){%>
+        </a>
+        <% } %>
+      <% }) %>
+
+  </div>
+</body>
+<% include ./partials/footer %>
